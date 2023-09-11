@@ -2,19 +2,27 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Accueil{% endblock %} E-Shop Symfony 6</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <meta  name="viewport" content="width=device-width, initial-scale=1.0">
         
+        {# <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> #}
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+        
         {% block stylesheets %}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         {% endblock %}
+        <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 
+        {# <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> #}
+        <script src="{{  asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
         {% block javascripts %}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
         {% endblock %}
+        <script src="{{  asset('assets/js/scripts.js') }}" defer></script>
     </head>
     <body>
+        {%  include "_partials/_nav.html.twig" %}
         {% block body %}{% endblock %}
+        {%  include "_partials/_footer.html.twig" %}
+
     </body>
 </html>
