@@ -10,19 +10,20 @@
             <h1>Register</h1>
 
             {{ form_errors(registrationForm) }}
+            {{ form_start(registrationForm) }}
                 <fieldset class="mb-3">
-                    <legend>My credentials</legend>
+                    <legend>Credentials</legend>
                     {{ form_row(registrationForm.lastname) }}
                     {{ form_row(registrationForm.firstname) }}
                     {{ form_row(registrationForm.email) }}
                 </fieldset>
                 <fieldset class="mb-3">
-                    <legend>My adrress</legend>
+                    <legend>Adrress</legend>
                         {{ form_row(registrationForm.address) }}
                         {{ form_row(registrationForm.zipcode) }}
                         {{ form_row(registrationForm.city) }}
                 </fieldset>
-                {{ form_start(registrationForm) }}
+                
 
                 {{ form_row(registrationForm.plainPassword, {
                     label: 'Password'

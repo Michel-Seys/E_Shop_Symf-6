@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\OrdersRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-use function Symfony\Component\Clock\now;
 
 #[ORM\Entity(repositoryClass: OrdersRepository::class)]
 class Orders

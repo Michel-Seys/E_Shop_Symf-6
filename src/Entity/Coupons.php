@@ -6,8 +6,6 @@ use App\Repository\CouponsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-use function Symfony\Component\Clock\now;
-
 #[ORM\Entity(repositoryClass: CouponsRepository::class)]
 class Coupons
 {
