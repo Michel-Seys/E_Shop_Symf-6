@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product list of {{ category.name }}{% endblock %}
+
+{% block body %}
+<main class="container">
+    <section class="row">
+
+            <p class="h1">Product list of {{ category.name }}</p>
+        {%  for product in category.products %}
+                <div class="col-3 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ product.name }}</h3>
+                            <p class="card-text">{{product.Description}}</p>
+                        </div>
+                    </div>
+                </div>
+        {%  endfor %}
+
+    </section>
+</main>
+{% endblock %}
