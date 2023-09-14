@@ -1,9 +1,6 @@
-
-
-
-
-
-<p>Email</p>
-
-<p>Hello {{ user.firstname }},</p>
+<h1>Activez votre compte</h1>
+<p>Bonjour {{ user.firstname }},</p>
+<p>Votre inscription sur le site e-commerce est à valider en cliquant sur le lien ci-dessous :</p>
+<p><a href="{{ absolute_url(path('check_user', {token: token})) }}">{{ absolute_url(path('check_user', {token: token})) }}</a></p>
+<p>Ce lien expirera dans 1 heures</p>
 
