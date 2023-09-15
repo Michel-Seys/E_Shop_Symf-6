@@ -18,10 +18,10 @@ class ProductFixtures extends Fixture
             for($prod = 1; $prod <=20; $prod++){
     
                 $product = new Products();
-                $product->setName($faker->text(5))
-                        ->setDescription($faker->text(5))
+                $product->setName($faker->text(15))
+                        ->setDescription($faker->text(50))
                         ->setSlug($faker->slug())
-                        ->setPrice($faker->numberBetween(100,99999))
+                        ->setPrice($faker->numberBetween(1000,999999))
                         ->setStock($faker->numberBetween(0, 50));
                 $category = $this->getReference('cat-'.rand(1,8));
                 $product->setCategories($category);

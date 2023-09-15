@@ -3,5 +3,46 @@
 {% block title %} Details {% endblock %}
 
 {% block body %}
-<h1>{{ product.name }} details</h1>
+<main class="container">
+    <section class="row">
+        <div class="col-12">
+            <p class="h1">{{ product.name }}</p>
+        </div>
+        <div class="col-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                {% for i in 1..product.images|length %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i - 1 }}" class="{{ (loop.first) ? 'active' : '' }}" aria-current="true" aria-label="{{ i }}"></button>
+                {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                {% for image in product.images%}
+                    <div class="carousel-item {{ (loop.index0 == 0) ? 'active' : '' }}">
+                        <img src="{{asset('assets/uploads/') ~ image.name }}" class="d-block w-100" alt="{{ product.name }}">
+                    </div>
+                {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-6">
+            <p>{{ product.Description}}</p>
+            <p>{{ product.categories.name }}</p>
+            <p>Prix: {{ product.price / 100}} €</p>
+            {% if product.stock > 0 %}
+                <a href="#" class="btn btn-success">Ajouter au panier</a>
+            {% else %}
+                <a href="#" class="btn btn-danger">Produit indisponible</a>
+            {% endif %}
+        </div>
+        </div>
+    </section>
+</main>
 {% endblock %}

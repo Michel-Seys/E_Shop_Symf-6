@@ -7,17 +7,22 @@
     <section class="row">
 
             <p class="h1">Product list of {{ category.name }}</p>
-        {%  for product in category.products %}
+        {%  for product in product.data %}
                 <div class="col-3 mb-3">
                     <div class="card h-100">
                         <div class="card-body">
                             <h3 class="card-title">{{ product.name }}</h3>
                             <p class="card-text">{{product.Description}}</p>
+                            <a href="{{ path('products_details', {slug: product.slug})}}" class="btn btn-info">go to ...</a>
                         </div>
                     </div>
                 </div>
         {%  endfor %}
-
+        {% set path = 'categories_list' %}
+        {% set slug = category.slug %}
+        {% set pages = product.pages %}
+        {% set currentPage = product.page %}
+        {% include "_partials/_pagination.html.twig" %}
     </section>
 </main>
 {% endblock %}
