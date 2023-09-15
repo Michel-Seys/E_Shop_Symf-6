@@ -132,7 +132,7 @@ class RegistrationController extends AbstractController
             'no-reply@monsite.net',
             $user->getEmail(),
             'Activation de votre compte sur le site e-commerce',
-            'register',
+            'register.html.twig',
             compact('user', 'token')
         );
         $this->addFlash('success', 'Email de vérification envoyé');

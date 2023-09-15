@@ -52,6 +52,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $is_verified = false;
 
+    #[ORM\Column(type: 'string', length: 100)]
+    private?string $resetToken;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -198,4 +201,22 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+	/**
+	 * @return 
+	 */
+	public function getResetToken(): ?string
+    {
+		return $this->resetToken;
+	}
+	
+	/**
+	 * @param  $resetToken 
+	 * @return self
+	 */
+	public function setResetToken(?string $resetToken): self 
+    {
+		$this->resetToken = $resetToken;
+		return $this;
+	}
 }
