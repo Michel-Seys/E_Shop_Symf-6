@@ -9,14 +9,18 @@
             <p class="h1">Product list of {{ category.name }}</p>
         {%  for product in product.data %}
                 <div class="col-3 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
+                <article class="card h-100">
+                    <img src="{{ asset('assets/uploads/product/mini/300x300-' ~ product.images[0].name ) }}" 
+                    class="card-img-top" 
+                    alt="{{ product.name }}">                        
+
+                    <div class="card-body">
                             <h3 class="card-title">{{ product.name }}</h3>
                             <p class="card-text">{{product.Description}}</p>
                             <a href="{{ path('products_details', {slug: product.slug})}}" class="btn btn-info">go to ...</a>
                         </div>
                     </div>
-                </div>
+                </article>
         {%  endfor %}
         {% set path = 'categories_list' %}
         {% set slug = category.slug %}
