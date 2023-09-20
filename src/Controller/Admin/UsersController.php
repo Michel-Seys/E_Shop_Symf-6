@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller\Admin;
+
+use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,9 +18,10 @@ class UsersController extends AbstractController
      * Summary of index
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(): Response
+    public function index(UsersRepository $usersRepository): Response
     {
-        return $this->render('admin/users/index.html.twig');
+        $users = $usersRepository->findBy([], ['firstname' => 'asc']);
+        return $this->render('admin/users/index.html.twig', compact('users'));
     }
 
 }

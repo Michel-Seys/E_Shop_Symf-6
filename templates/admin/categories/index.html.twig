@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+{% block title %}Administration E-shop{% endblock %}
+
+{% block body %}
+    
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-secondary p-3">
+                <p class="h1">Liste des catégories</p>
+                <div class="table-responsive">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Parent</th>
+                                <th scope="col">Slug</th>
+                                <th scope="col">Ordre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for categorie in categories %}
+                                <tr class="">
+                                    <td scope="row">{{ categorie.id }}</td>
+                                    <td scope="row">{{ categorie.name }}</td>
+                                    <td scope="row">
+                                        {% if categorie.parent is not null %}
+                                            {{ categorie.parent.name }}
+                                        {% endif %}
+                                    </td>
+                                    <td scope="row">{{ categorie.slug }}</td>
+                                    <td scope="row">{{ categorie.categoryOrder }}</td>
+
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+            </main>
+        </div>
+    </div>
+{% endblock %}

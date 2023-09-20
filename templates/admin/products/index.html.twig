@@ -1,7 +1,45 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Admin Produits{% endblock %}
+{% extends "base.html.twig" %}
+{% block title %}Administration E-shop{% endblock %}
 
 {% block body %}
-<h1>Admin Produits</h1>
+    
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-secondary p-3">
+                <p class="h1">Liste des produits</p>
+                <div class="table-responsive">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Categorie</th>
+                                <th scope="col">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for produit in produits %}
+                            <tr>
+                                <td>{{ produit.id }}</td>
+                                <td><img src="{{ asset('assets/uploads/product/mini/300x300-' ~ produit.images[0].name ) }}" alt="{{ produit.name }}" class="img-thumbnail"></td>
+                                <td>{{ produit.name }}</td>
+                                <td>{{ produit.price / 100 }}</td>
+                                <td>{{ produit.stock }}</td>
+                                <td>{{ produit.categories.name }}</td>
+                                <td>
+                                    <a href="{{ path('admin_products_edit', {id: produit.id})}}" class="btn btn-success">Modifier</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
 {% endblock %}
