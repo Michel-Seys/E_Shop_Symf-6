@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\OrdersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -27,8 +29,12 @@ class Orders
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $users = null;
 
+    #[ORM\OneToMany(mappedBy: 'orders', targetEntity: OrdersDetails::class, orphanRemoval: true, cascade: ['persist'])]
+    private $ordersDetails;
+
     public function __construct()
     {
+        $this->ordersDetails = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
     
@@ -81,6 +87,33 @@ class Orders
     public function setUsers(?Users $users): static
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getOrdersDetails(): Collection
+    {
+        return $this->ordersDetails;
+    }
+
+    public function addOrdersDetail(OrdersDetails $ordersDetail): self
+    {
+        if (!$this->ordersDetails->contains($ordersDetail)) {
+            $this->ordersDetails[] = $ordersDetail;
+            $ordersDetail->setOrders($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdersDetail(OrdersDetails $ordersDetail): self
+    {
+        if ($this->ordersDetails->removeElement($ordersDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($ordersDetail->getOrders() === $this) {
+                $ordersDetail->setOrders(null);
+            }
+        }
 
         return $this;
     }
