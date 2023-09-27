@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Categories;
-use App\Entity\Products;
 use App\Repository\ProductsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,4 +22,6 @@ class CategoriesController extends AbstractController
         $product = $productsRepository->findProductsPaginated($page, $category->getSlug(), 3);
         return $this->render('categories/list.html.twig', compact('category', 'product'));
     }
+
+
 }

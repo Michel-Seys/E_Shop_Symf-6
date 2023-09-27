@@ -27,8 +27,6 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
     }
     public function getDependencies(): array
     {
-        return [
-            ProductFixtures::class
-        ];
+        return [ProductFixtures::class];
     }
 }

@@ -26,7 +26,7 @@ class OrdersController extends AbstractController
             return $this->redirectToRoute('app_main');
         }
 
-        //Le panier n'est pas vide, on crée la commande
+        //Le panier n'est pas vide, on crée la commande.
         $order = new Orders();
 
         // On remplit la commande
@@ -34,17 +34,17 @@ class OrdersController extends AbstractController
         // !!! Creer un numero de reference !!!
         $order->setReference(uniqid());
 
-        // On parcourt le panier pour créer les détails de commande
+        // On parcourt le panier pour créer les détails de commande.
         foreach($panier as $item => $quantity){
             $orderDetails = new OrdersDetails();
 
-            // On va chercher le produit
+            // On va chercher le produit.
             // Vérification BDD à effectuer !!!
             $product = $productsRepository->find($item);
             
             $price = $product->getPrice();
 
-            // On crée le détail de commande
+            // On crée le détail de commande.
             $orderDetails->setProducts($product);
             $orderDetails->setPrice($price);
             $orderDetails->setQuantity($quantity);
@@ -52,8 +52,7 @@ class OrdersController extends AbstractController
             $order->addOrdersDetail($orderDetails);
         }
 
-        // On persiste et on flush
-        // !!! Try and Catch !!!
+        // On persiste et on flush.
         $em->persist($order);
         $em->flush();
 
