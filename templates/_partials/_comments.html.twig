@@ -1,0 +1,12 @@
+<div>
+    <p class="h3">les avis pour {{ product.name }}</p>
+    <div>
+        {% for comment in comments %}
+            <div class="col-9">
+                <p>ecrit par : {{ comment.user.firstName }}, le {{ comment.createdAt|date("m/d/Y") }}</p>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% endfor %}
+        <a href="#" class="btn btn-secondary">Donner un avis</a>
+    </div>
+</div>

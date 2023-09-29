@@ -46,10 +46,18 @@ class Products
     #[ORM\OneToMany(mappedBy: 'products', targetEntity: Images::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Comments::class)]
+    private Collection $user;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Comments::class)]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
+        $this->user = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,6 +149,66 @@ class Products
             // set the owning side to null (unless already changed)
             if ($image->getProducts() === $this) {
                 $image->setProducts(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comments>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(Comments $user): static
+    {
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
+            $user->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Comments $user): static
+    {
+        if ($this->user->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getProduct() === $this) {
+                $user->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comments>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getProduct() === $this) {
+                $comment->setProduct(null);
             }
         }
 

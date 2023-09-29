@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -55,9 +57,13 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 100)]
     private?string $resetToken = null;
 
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Comments::class)]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,17 +212,47 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return 
 	 */
 	public function getResetToken(): ?string
-    {
-		return $this->resetToken;
-	}
+                         {
+                     		return $this->resetToken;
+                     	}
 	
 	/**
 	 * @param  $resetToken 
 	 * @return self
 	 */
 	public function setResetToken(?string $resetToken): self 
+                         {
+                     		$this->resetToken = $resetToken;
+                     		return $this;
+                     	}
+
+    /**
+     * @return Collection<int, Comments>
+     */
+    public function getComments(): Collection
     {
-		$this->resetToken = $resetToken;
-		return $this;
-	}
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }
