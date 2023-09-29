@@ -1,0 +1,2 @@
+# E_Shop_Symf-6
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2212976cbb2145b5bd6a2fcc59b32b93)](https://app.codacy.com/gh/Michel-Seys/E_Shop_Symf-6?utm_source=github.com&utm_medium=referral&utm_content=Michel-Seys/E_Shop_Symf-6&utm_campaign=Badge_Grade)
