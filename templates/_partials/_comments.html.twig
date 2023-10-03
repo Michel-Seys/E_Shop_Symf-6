@@ -3,10 +3,19 @@
     <div>
         {% for comment in comments %}
             <div class="col-9">
-                <p>ecrit par : {{ comment.user.firstName }}, le {{ comment.createdAt|date("m/d/Y") }}</p>
+                <p>ecrit par : {{ comment.user.firstName }}, le {{ comment.createdAt|date("m/d/Y") }} à {{ comment.createdAt|format_datetime('none', 'short', locale='fr')}}</p>
                 <p>{{ comment.content }}</p>
             </div>
         {% endfor %}
-        <a href="#" class="btn btn-secondary">Donner un avis</a>
+        <p>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" {{ app.user ? "" : "disabled" }}>
+            Donner un avis
+        </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                {% include '/comments/_form.html.twig' %}
+            </div>
+        </div>
     </div>
 </div>
