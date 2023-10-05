@@ -83,11 +83,7 @@ class ProductsController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'edit')]
-    /**
-     * Summary of index
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
+    #[Route('/edition/{id}', name: 'edit')]
     public function edit(Products $product, Request $request, EntityManagerInterface $em, SluggerInterface $slugger, PictureService $pictureService): Response
     {
         $this->denyAccessUnlessGranted('PRODUCT_EDIT', $product);
@@ -125,7 +121,7 @@ class ProductsController extends AbstractController
 
             $this->addFlash('success', 'Produit modifié !');
 
-            return$this->redirectToRoute('admin_products_index');
+            return $this->redirectToRoute('admin_products_index');
 
         }
 

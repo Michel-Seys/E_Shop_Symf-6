@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un utilisateur{% endblock %}
+
+{% block body %}
+
+<section class="container">
+    <div class="row">
+        <div class="col">
+            <p class="h1">Modification d'un utilisateur</p>
+                {% include "registration/register.html.twig" with {'button_label': 'Modifier'} %}
+
+        </div>
+    </div>
+</section>
+{% endblock %}

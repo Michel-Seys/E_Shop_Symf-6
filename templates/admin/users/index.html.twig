@@ -53,7 +53,7 @@
 
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-success">Modifier</a>
+                                    <a href="{{ path('admin_users_modify', {id: user.id}) }}" class="btn btn-success">Modifier</a>
                                 </td>
                             </tr>
                         {% endfor %}

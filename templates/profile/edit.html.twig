@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+
+<section class="container">
+    <div class="row">
+        <div class="col">
+        {% if(app.user) %}
+            <p class="h1">Modification du profil</p>
+
+        {% else %}
+            <p class="h1">Enregistrement</p>
+        {% endif %}
+            
+        {% include "registration/register.html.twig" with {'button_label': 'Modifier'} %}
+
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -8,6 +8,7 @@ use App\Repository\UsersRepository;
 use App\Security\UsersAuthenticator;
 use App\Service\SendMailService;
 use App\Service\JWTService;
+use App\Service\passwordService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -26,7 +26,8 @@ class RegistrationController extends AbstractController
                                 UsersAuthenticator $authenticator, 
                                 EntityManagerInterface $entityManager, 
                                 SendMailService $mailer, 
-                                JWTService $jwt
+                                JWTService $jwt,
+                                passwordService $pwdService
                                 ): Response
     {
         $user = new Users();
@@ -35,12 +36,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $pwdService->createPassword($user, $userPasswordHasher, $form);
 
             $entityManager->persist($user);
             $entityManager->flush();
